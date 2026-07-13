@@ -7,11 +7,9 @@ description: |
   Use when a user needs help with the specific workflow this skill supports.
   Include trigger terms and adjacent cases this skill should not handle.
 authors: ODIA Team
-owner_agency: EOTSS / ODIA
 status: draft
 categories:
   - replace-category
-data_classification: internal
 tools:
   - Read
   - Grep
@@ -68,4 +66,3 @@ Stop and ask for confirmation before:
 - Running write operations
 - Changing production objects
 - Making access, permission, or policy recommendations that need owner approval
-

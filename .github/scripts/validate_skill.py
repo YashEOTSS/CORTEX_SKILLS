@@ -20,17 +20,13 @@ REQUIRED_FIELDS = [
     "summary",
     "description",
     "authors",
-    "owner_agency",
     "status",
-    "categories",
-    "data_classification",
     "tools",
     "prompt",
     "language",
 ]
 
 VALID_STATUSES = {"draft", "beta", "stable", "archived"}
-VALID_DATA_CLASSIFICATIONS = {"public", "internal", "restricted", "confidential"}
 LICENSE_MARKERS = ("apache license", "commonwealth", "odia", "mit license")
 SECRET_PATTERNS = [
     re.compile(r"password\s*[:=]", re.IGNORECASE),
@@ -162,13 +158,6 @@ def validate_skill(skill_dir: Path) -> tuple[list[str], list[str]]:
         if status and status not in VALID_STATUSES:
             errors.append(f"Status {status!r} must be one of {sorted(VALID_STATUSES)}")
 
-        data_classification = frontmatter.get("data_classification")
-        if data_classification and data_classification not in VALID_DATA_CLASSIFICATIONS:
-            warnings.append(
-                f"data_classification {data_classification!r} is not one of "
-                f"{sorted(VALID_DATA_CLASSIFICATIONS)}"
-            )
-
     if not license_file.exists():
         errors.append("Missing LICENSE")
     else:
@@ -215,4 +204,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

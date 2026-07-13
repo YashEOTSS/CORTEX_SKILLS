@@ -6,13 +6,11 @@ summary: Helps analysts review datasets and analysis workflows before sharing or
 description: |
   Use when an analyst needs to review a dataset, notebook, SQL workflow, or analysis package before sharing it with another team. The skill checks data quality, metadata, privacy concerns, reproducibility, ownership, and handoff readiness. Triggers include dataset review, data quality review, analysis handoff, share this dataset, review my workflow, Commonwealth data review, and ODIA review checklist. Do not use for legal approval, production access changes, or final data classification decisions.
 authors: ODIA Team
-owner_agency: EOTSS / ODIA
 status: draft
 categories:
   - analytics
   - data-quality
   - governance
-data_classification: internal
 tools:
   - Read
   - Grep
@@ -88,4 +86,3 @@ Stop and ask for human confirmation before:
 - Sharing derived outputs without confirming data owner expectations.
 - Forgetting to document filters, joins, and time periods.
 - Recommending reuse when the source system or refresh cadence is unclear.
-

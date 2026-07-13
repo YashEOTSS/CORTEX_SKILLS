@@ -18,13 +18,12 @@
 
 - [ ] Required frontmatter fields are complete.
 - [ ] `status` is one of `draft`, `beta`, `stable`, or `archived`.
-- [ ] `owner_agency` identifies the owning team.
-- [ ] `data_classification` reflects the intended sharing level.
 - [ ] The `description` explains when to use and when not to use the skill.
 
 ### Testing
 
 - [ ] I tested the skill with the example prompt.
+- [ ] I tested the skill in CoCo using `$<skill-name>`.
 - [ ] I ran `python .github/scripts/validate_skill.py --all`.
 - [ ] The skill behaves as described.
 
@@ -39,4 +38,3 @@
 ## Known Limitations
 
 <!-- Describe anything reviewers or users should know. -->
-
