@@ -1,6 +1,23 @@
 ---
+id: data-ingest-medallion
 name: data-ingest-medallion
-description: "Automate end-to-end data ingestion into Snowflake following medallion architecture (Raw → Staging). Handles file staging, schema inference, table creation, data loading, and staging view generation. Use when: ingesting a file, loading data into Snowflake, staging a CSV, new dataset to process, medallion ingest, load CSV into raw table, ingest and transform data. Triggers: ingest this file, load data, new dataset, stage and process, medallion ingest, ingest CSV, load into snowflake, put file in snowflake, upload and process data."
+title: Data Ingest Medallion
+summary: Automates Snowflake file ingestion using a raw-to-staging medallion pattern.
+description: |
+  Automate end-to-end data ingestion into Snowflake following medallion architecture from local files to RAW tables and STAGING views. Handles file staging, schema inference, table creation, data loading, and staging view generation. Use when ingesting files, loading data into Snowflake, staging CSV or Parquet files, creating raw tables, or preparing staging views.
+authors: ODIA Team
+status: draft
+categories:
+  - data-engineering
+  - snowflake
+  - medallion
+tools:
+  - snowflake_sql_execute
+  - Read
+  - Grep
+  - Bash
+prompt: Help me ingest this CSV into Snowflake using the medallion pattern.
+language: en
 ---
 
 # Data Ingest — Medallion Architecture
