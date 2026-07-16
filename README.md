@@ -8,82 +8,56 @@ A shared repository for the ODIA team to create, review, and reuse Cortex Code (
 
 ### Creating and Sharing a Skill
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        SKILL AUTHOR WORKFLOW                             │
-└─────────────────────────────────────────────────────────────────────────┘
-
-  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-  │  1. COPY     │     │  2. EDIT     │     │  3. VALIDATE │
-  │  _template/  │────▶│  SKILL.md    │────▶│  locally     │
-  │              │     │  + LICENSE   │     │              │
-  └──────────────┘     └──────────────┘     └──────┬───────┘
-                                                   │
-                                                   ▼
-  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-  │  6. TEAM     │     │  5. MERGE    │     │  4. OPEN     │
-  │  SYNCS in    │◀────│  to main     │◀────│  Pull        │
-  │  CoCo        │     │  (CI passes) │     │  Request     │
-  └──────────────┘     └──────────────┘     └──────────────┘
+```mermaid
+flowchart LR
+    A[📁 Copy _template/] --> B[✏️ Edit SKILL.md + LICENSE]
+    B --> C[✅ Validate locally]
+    C --> D[🔀 Open Pull Request]
+    D --> E[🤖 CI validates]
+    E -->|Pass| F[✅ Merge to main]
+    E -->|Fail| D
+    F --> G[📢 Notify team to sync]
 ```
 
 ### Installing and Using Skills in CoCo Desktop
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                       TEAM MEMBER WORKFLOW                               │
-└─────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph First Time Setup
+        A[Open CoCo Desktop chat] --> B["Type: I have a github which has skills\nin it I want to use in cortex code:\nhttps://github.com/YashEOTSS/CORTEX_SKILLS.git"]
+        B --> C[Plugin installs automatically]
+        C --> D[Appears in Agent Settings > Plugins]
+    end
 
-  ┌───────────────────────────────────────┐
-  │  FIRST TIME ONLY                      │
-  │                                       │
-  │  In CoCo Desktop chat, type:          │
-  │  "I have a github which has skills    │
-  │   in it I want to use in cortex       │
-  │   code: https://github.com/           │
-  │   YashEOTSS/CORTEX_SKILLS.git"       │
-  │                                       │
-  │  ✓ Plugin installs automatically      │
-  │  ✓ Appears in Agent Settings          │
-  └───────────────────┬───────────────────┘
-                      │
-                      ▼
-  ┌───────────────────────────────────────┐
-  │  WHEN SKILLS ARE UPDATED              │
-  │                                       │
-  │  Click "Sync" in Agent Settings       │
-  │  — or type: "Sync my skills"          │
-  └───────────────────┬───────────────────┘
-                      │
-                      ▼
-  ┌───────────────────────────────────────┐
-  │  USE A SKILL                          │
-  │                                       │
-  │  $cortex-skills:skill-name <prompt>   │
-  │                                       │
-  │  Examples:                            │
-  │  $cortex-skills:commonwealth-data-    │
-  │    review Review my dataset.          │
-  │  $cortex-skills:data-ingest-          │
-  │    medallion Ingest my CSV.           │
-  └───────────────────────────────────────┘
+    subgraph When Skills Are Updated
+        E["Click Sync on plugin page\n— or type: Sync my skills"]
+    end
+
+    subgraph Use A Skill
+        F["$cortex-skills:commonwealth-data-review\nReview my dataset before sharing."]
+        G["$cortex-skills:data-ingest-medallion\nIngest my CSV into Snowflake."]
+    end
+
+    D --> E
+    E --> F
+    E --> G
 ```
 
 ### End-to-End Flow
 
-```
-┌────────┐   push    ┌────────┐  CI validates  ┌────────┐   sync    ┌────────┐
-│ Author │─────────▶ │ GitHub │ ─────────────▶  │  main  │ ────────▶│  CoCo  │
-│ writes │           │   PR   │                 │ branch │           │Desktop │
-│ skill  │           │        │  ◀── fix if     │        │           │(team)  │
-└────────┘           └────────┘     failing     └────────┘           └────────┘
-                                                                         │
-                                                                         ▼
-                                                                    ┌────────┐
-                                                                    │ Team   │
-                                                                    │ uses   │
-                                                                    │ skill  │
-                                                                    └────────┘
+```mermaid
+flowchart LR
+    A["👩‍💻 Author\nwrites skill"] -->|push| B["GitHub\nPull Request"]
+    B -->|CI validates| C{"Pass?"}
+    C -->|Yes| D["main\nbranch"]
+    C -->|No| B
+    D -->|team syncs| E["🖥️ CoCo Desktop\n(all team members)"]
+    E --> F["🚀 Team uses\nskill in daily work"]
+
+    style A fill:#4CAF50,color:#fff
+    style D fill:#2196F3,color:#fff
+    style E fill:#9C27B0,color:#fff
+    style F fill:#FF9800,color:#fff
 ```
 
 ---
