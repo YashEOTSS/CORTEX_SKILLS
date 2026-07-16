@@ -4,6 +4,90 @@ A shared repository for the ODIA team to create, review, and reuse Cortex Code (
 
 ---
 
+## How It Works (Quick Visual)
+
+### Creating and Sharing a Skill
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        SKILL AUTHOR WORKFLOW                             │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+  │  1. COPY     │     │  2. EDIT     │     │  3. VALIDATE │
+  │  _template/  │────▶│  SKILL.md    │────▶│  locally     │
+  │              │     │  + LICENSE   │     │              │
+  └──────────────┘     └──────────────┘     └──────┬───────┘
+                                                   │
+                                                   ▼
+  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+  │  6. TEAM     │     │  5. MERGE    │     │  4. OPEN     │
+  │  SYNCS in    │◀────│  to main     │◀────│  Pull        │
+  │  CoCo        │     │  (CI passes) │     │  Request     │
+  └──────────────┘     └──────────────┘     └──────────────┘
+```
+
+### Installing and Using Skills in CoCo Desktop
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       TEAM MEMBER WORKFLOW                               │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  ┌───────────────────────────────────────┐
+  │  FIRST TIME ONLY                      │
+  │                                       │
+  │  In CoCo Desktop chat, type:          │
+  │  "I have a github which has skills    │
+  │   in it I want to use in cortex       │
+  │   code: https://github.com/           │
+  │   YashEOTSS/CORTEX_SKILLS.git"       │
+  │                                       │
+  │  ✓ Plugin installs automatically      │
+  │  ✓ Appears in Agent Settings          │
+  └───────────────────┬───────────────────┘
+                      │
+                      ▼
+  ┌───────────────────────────────────────┐
+  │  WHEN SKILLS ARE UPDATED              │
+  │                                       │
+  │  Click "Sync" in Agent Settings       │
+  │  — or type: "Sync my skills"          │
+  └───────────────────┬───────────────────┘
+                      │
+                      ▼
+  ┌───────────────────────────────────────┐
+  │  USE A SKILL                          │
+  │                                       │
+  │  $cortex-skills:skill-name <prompt>   │
+  │                                       │
+  │  Examples:                            │
+  │  $cortex-skills:commonwealth-data-    │
+  │    review Review my dataset.          │
+  │  $cortex-skills:data-ingest-          │
+  │    medallion Ingest my CSV.           │
+  └───────────────────────────────────────┘
+```
+
+### End-to-End Flow
+
+```
+┌────────┐   push    ┌────────┐  CI validates  ┌────────┐   sync    ┌────────┐
+│ Author │─────────▶ │ GitHub │ ─────────────▶  │  main  │ ────────▶│  CoCo  │
+│ writes │           │   PR   │                 │ branch │           │Desktop │
+│ skill  │           │        │  ◀── fix if     │        │           │(team)  │
+└────────┘           └────────┘     failing     └────────┘           └────────┘
+                                                                         │
+                                                                         ▼
+                                                                    ┌────────┐
+                                                                    │ Team   │
+                                                                    │ uses   │
+                                                                    │ skill  │
+                                                                    └────────┘
+```
+
+---
+
 ## Table of Contents
 
 - [Repository Structure](#repository-structure)
