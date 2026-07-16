@@ -9,42 +9,50 @@ The pattern is simple:
 3. Other team members install or sync this repo in CoCo.
 4. Everyone can invoke shared skills with `$skill-name`.
 
-## How To Use These Skills In CoCo
+## How To Use These Skills In CoCo Desktop
 
-Install the full repo in CoCo:
+### Install the full repo as a plugin
 
-```text
-Install the skills from https://github.com/<org>/<repo>
-```
-
-For local testing before the repo is pushed:
+In the CoCo Desktop chat, type:
 
 ```text
-Install the skills from C:\Users\Yash.Malviya\OneDrive - Commonwealth of Massachusetts\Desktop\COMO COCO\CORTEX_SKILLS
+I have a github which has skills in it I want to use in cortex code: https://github.com/YashEOTSS/CORTEX_SKILLS.git
 ```
 
-After someone adds or updates a skill:
+CoCo will clone the repo, create a plugin manifest, and register it automatically. The plugin appears in **Agent Settings > Plugins** within a few seconds.
+
+### Install a single skill from the repo
+
+```text
+Install the skill at https://github.com/YashEOTSS/CORTEX_SKILLS/tree/main/skills/commonwealth-data-review
+```
+
+### Sync after updates
+
+When someone pushes changes to the repo, click the **Sync** button on the plugin's detail page in Agent Settings, or type:
 
 ```text
 Sync my skills
 ```
 
-List installed skills:
+### Use a skill
+
+Invoke a skill by name with the plugin prefix:
 
 ```text
-/skill list
+$cortex-skills:commonwealth-data-review Help me review this dataset workflow before I share it with another team.
 ```
 
-Use a skill:
-
 ```text
-$commonwealth-data-review Help me review this dataset workflow before I share it with another team.
+$cortex-skills:data-ingest-medallion Ingest my CSV into Snowflake.
 ```
 
-Install one skill instead of the whole repo:
+### For local testing (before pushing to GitHub)
+
+If you want to test skills from a local folder instead of GitHub, use the local plugin installer:
 
 ```text
-Install the skill at https://github.com/<org>/<repo>/tree/main/skills/<skill-name>
+/local-plugin-installer C:\path\to\your\local\CORTEX_SKILLS
 ```
 
 More detailed usage notes are in [docs/coco-usage.md](docs/coco-usage.md).

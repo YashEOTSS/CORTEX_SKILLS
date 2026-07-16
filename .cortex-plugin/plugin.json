@@ -1,0 +1,5 @@
+{
+  "name": "cortex-skills",
+  "description": "Shared Cortex Code skills for the Commonwealth team — includes data ingestion (medallion pattern) and dataset review workflows.",
+  "version": "1.0.0"
+}
