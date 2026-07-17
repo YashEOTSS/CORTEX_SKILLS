@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-71.06, 42.36]},
+      "properties": {"city": "Boston", "sales": 100, "date": "2026-06-01"}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-71.05, 42.37]},
+      "properties": {"city": "Boston", "sales": 120, "date": "2026-06-02"}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Polygon", "coordinates": [[[-71.1, 42.3], [-71.0, 42.3], [-71.0, 42.4], [-71.1, 42.4], [-71.1, 42.3]]]},
+      "properties": {"city": "Cambridge", "sales": 200, "date": "2026-06-03"}
+    }
+  ]
+}

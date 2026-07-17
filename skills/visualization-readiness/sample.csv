@@ -1,0 +1,4 @@
+latitude,longitude,city,sales,date,source,target
+42.36,-71.06,Boston,100,2026-06-01,A,B
+42.37,-71.05,Boston,120,2026-06-02,B,C
+,,-,90,2026-06-03,C,D
