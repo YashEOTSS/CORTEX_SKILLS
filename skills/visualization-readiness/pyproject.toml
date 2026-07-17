@@ -1,0 +1,8 @@
+[project]
+name = "visualization-readiness"
+version = "0.1.0"
+description = "Assess CSV or Snowflake table readiness for maps, charts, and dashboards"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.0.0",
+]

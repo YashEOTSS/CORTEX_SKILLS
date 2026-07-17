@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{TITLE}}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        .info { padding: 8px 12px; font: 14px/18px sans-serif; background: rgba(255,255,255,0.92); box-shadow: 0 1px 5px rgba(0,0,0,0.3); border-radius: 6px; }
+        .info h4 { margin: 0 0 5px; color: #333; font-size: 15px; }
+        .info b { color: #1a73e8; }
+        .legend { line-height: 20px; color: #555; }
+        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.75; border-radius: 2px; }
+        .title-bar { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1000; background: rgba(27,42,74,0.92); color: white; padding: 8px 20px; border-radius: 6px; font-size: 16px; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body>
+    <div class="title-bar">{{TITLE}} ({{FEATURE_COUNT}} features)</div>
+    <div id="map"></div>
+    <script>
+        var geojsonData = {{GEOJSON_DATA}};
+        var map = L.map('map').setView([42.2, -71.8], 8);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 19
+        }).addTo(map);
+
+        var info = L.control();
+        info.onAdd = function(map) { this._div = L.DomUtil.create('div','info'); this.update(); return this._div; };
+        info.update = function(props) {
+            this._div.innerHTML = '<h4>Feature Info</h4>' +
+                (props ? Object.keys(props).map(function(k) { return '<b>' + k + ':</b> ' + props[k]; }).join('<br/>')
+                : 'Hover over a feature');
+        };
+        info.addTo(map);
+
+        var palette = ['#2c7bb6','#00a6ca','#00ccbc','#90eb9d','#ffff8c','#f9d057','#f29e2e','#e76818','#d7191c'];
+        var featureIndex = 0;
+        function style(feature) {
+            var color = palette[featureIndex++ % palette.length];
+            return { fillColor: color, weight: 1.2, opacity: 1, color: '#444', fillOpacity: 0.6 };
+        }
+
+        var geojsonLayer;
+        function highlightFeature(e) {
+            var l = e.target;
+            l.setStyle({ weight: 3, color: '#1a73e8', fillOpacity: 0.85 });
+            l.bringToFront();
+            info.update(l.feature.properties);
+        }
+        function resetHighlight(e) { geojsonLayer.resetStyle(e.target); info.update(); }
+        function zoomToFeature(e) { map.fitBounds(e.target.getBounds()); }
+        function onEachFeature(feature, layer) {
+            layer.on({ mouseover: highlightFeature, mouseout: resetHighlight, click: zoomToFeature });
+            var label = feature.properties[Object.keys(feature.properties)[1]] || feature.properties[Object.keys(feature.properties)[0]] || '';
+            layer.bindTooltip(String(label), { sticky: true, direction: 'top' });
+        }
+
+        geojsonLayer = L.geoJson(geojsonData, { style: style, onEachFeature: onEachFeature }).addTo(map);
+        map.fitBounds(geojsonLayer.getBounds().pad(0.05));
+        L.control.scale({imperial: false}).addTo(map);
+    </script>
+</body>
+</html>
